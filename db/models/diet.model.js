@@ -8,10 +8,11 @@ const DIET_TABLE = 'diet';
 
 const DietSchema = {
   id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
-    autoIncrement: true,
+    // autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
   },
   name: {
     allowNull: false,

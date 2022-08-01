@@ -14,12 +14,13 @@ const RECIPE_TABLE = 'recipe';
 
 const RecipeSchema = {
   id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
-    autoIncrement: true,
+    // autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER,
   },
-  name: {
+  title: {
     allowNull: false,
     type: DataTypes.STRING,
   },

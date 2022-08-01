@@ -1,9 +1,16 @@
 const boom = require('@hapi/boom');
+const { default: axios } = require('axios');
 
 const { models } = require('../libs/sequelize');
-
+const API_KEY = "bca4aa4ee42e49cca7cd396818b372ae";
 class DietService {
     constructor() {}
+
+async getApiDiets() {
+    const apiDiet = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`)
+    const rpta = await apiDiet.data.results
+    return rpta
+}
 
     async create(data){
         const newDiet= await models.Diet.create(data);
