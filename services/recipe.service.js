@@ -52,7 +52,22 @@ class RecipeService {
             return recipeDB
         }else if(id.length < 7){
             const recipeApi = await this.findOneApi(id)
-            return recipeApi.data
+            // return recipeApi.data
+            const recipe =  {
+                id: recipeApi.data.id,
+                title: recipeApi.data.title,
+                summary: recipeApi.data.summary,
+                image: recipeApi.data.image,
+                diet: recipeApi.data.diets,
+                healthScore: recipeApi.data.healthScore,
+                analyzedInstructions: recipeApi.data.analyzedInstructions[0]?.steps.map(e => {
+                    return {
+                        number: e.number,
+                        step: e.step
+                    }
+                })
+            }
+            return recipe
         }
     }
     async update(id, changes) {
