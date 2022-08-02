@@ -31,6 +31,9 @@ const RecipeSchema = {
   stepToStep: {
     type: DataTypes.STRING,
   },
+  healthScore: {
+    type: DataTypes.STRING,
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,

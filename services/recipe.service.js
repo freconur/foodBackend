@@ -36,10 +36,24 @@ class RecipeService {
         // const recipes = await models.Recipe.findAll();
         // return recipes;
     }
-    async findOne(id) {
+    async findOneDb(id) {
         const recipe = await models.Recipe.findByPk(id);
         if(!recipe) throw boom.notFound('recipe not found')
         return recipe;
+    }
+    async findOneApi(id) {
+        const recipe = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+        return recipe
+    }
+    async findOne(id) {
+        if(id.length > 7) {
+            const recipeDB = await this.findOneDb(id);
+            if(!recipeDB) throw boom.notFound('recipe not found')
+            return recipeDB
+        }else if(id.length < 7){
+            const recipeApi = await this.findOneApi(id)
+            return recipeApi.data
+        }
     }
     async update(id, changes) {
         const recipeId = await this.findOne(id);
