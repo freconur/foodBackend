@@ -6,6 +6,7 @@ const { Orders, OrdersSchema } = require('./orders.model')
 const { OrdersProducts, OrdersProductsSchema } = require('./order-product.model')
 const { RecipeSchema, Recipe } = require('./recipe.model')
 const { Diet, DietSchema } = require('./diet.model')
+const { DietRecipe, DietRecipeSchema} = require('./diet-recipe.model')
 
 function setupModels(sequelize) {
   User.init(UserSchema, User.config(sequelize));
@@ -16,6 +17,7 @@ function setupModels(sequelize) {
   OrdersProducts.init(OrdersProductsSchema, OrdersProducts.config(sequelize));
   Recipe.init(RecipeSchema, Recipe.config(sequelize));
   Diet.init(DietSchema, Diet.config(sequelize));
+  DietRecipe.init(DietRecipeSchema, DietRecipe.config(sequelize));
 
   //aquie hacemos las asociaciones
   Customer.associate(sequelize.models);
