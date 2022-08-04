@@ -6,7 +6,8 @@ const validatorHandler = require('../middlewares/validator.handler');
 const {
   getDietSchema,
   createDietSchema,
-  updateDietSchema
+  updateDietSchema,
+  addItemSchema
 } = require('../schemas/diet.schema');
 
 router.get('/', async (req, res) => {
@@ -28,33 +29,42 @@ router.get(
   }
 );
 router.post(
-    '/',
-    validatorHandler(createDietSchema, 'body'),
-    async (req, res) => {
+  '/',
+  validatorHandler(createDietSchema, 'body'),
+  async (req, res) => {
+    const body = req.body;
+    const newRecipe = await service.create(body);
+    res.status(201).json(newRecipe);
+  }
+);
+router.post(
+  '/add-item',
+  validatorHandler(addItemSchema, 'body'),
+  async (req, res) => {
+    const body = req.body;
+    const newRecipe = await service.addItem(body);
+    res.status(201).json(newRecipe);
+  }
+);
+router.patch(
+  '/:id',
+  validatorHandler(updateDietSchema, 'params'),
+  validatorHandler(updateDietSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
       const body = req.body;
-      const newRecipe = await service.create(body);
-      res.status(201).json(newRecipe);
+      const recipteUdapte = await service.update(id, body);
+      res.json(recipteUdapte);
+    } catch (error) {
+      next(error);
     }
-  );
-  router.patch(
-    '/:id',
-    validatorHandler(updateDietSchema, 'params'),
-    validatorHandler(updateDietSchema, 'body'),
-    async (req, res, next) => {
-      try {
-        const { id } = req.params;
-        const body = req.body;
-        const recipteUdapte = await service.update(id, body);
-        res.json(recipteUdapte);
-      } catch (error) {
-        next(error);
-      }
-    }
-  );
-  router.delete('/:id', async (req, res) => {
-    const { id } = req.params;
-    const deleteRecipe = await service.delete(id);
-    res.json(deleteRecipe);
-  });
+  }
+);
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  const deleteRecipe = await service.delete(id);
+  res.json(deleteRecipe);
+});
 
-  module.exports=router;
+module.exports = router;

@@ -21,9 +21,15 @@ async getApiDiets() {
         return diet;
     }
     async findOne(id) {
-        const diet = await models.Diet.findByPk(id);
+        const diet = await models.Diet.findByPk(id,{
+            include: ['items']
+        });
         if(!diet) throw boom.notFound('recipe not found')
         return diet;
+    }
+    async addItem(data){
+        const newDiet = await models.DietRecipe.create(data);
+        return newDiet;
     }
     async update(id, changes) {
         const dietId = await this.findOne(id);

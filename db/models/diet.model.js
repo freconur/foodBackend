@@ -27,7 +27,15 @@ const DietSchema = {
 };
 
 class Diet extends Model {
-    static associate(){}
+    static associate(models){
+      this.belongsToMany(models.Recipe, {
+        //tenemos que decirle que a traves de que tabla va resolver la relacion
+        as:'items',
+        through: models.DietRecipe,
+        foreignKey: 'dietId',  
+        otherKey: 'recipeId'
+      })
+    }
     static config(sequelize){
         return {
             sequelize,
