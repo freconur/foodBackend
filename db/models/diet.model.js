@@ -32,7 +32,7 @@ class Diet extends Model {
         //tenemos que decirle que a traves de que tabla va resolver la relacion
         as:'items',
         through: models.DietRecipe,
-        foreignKey: 'dietId',
+        foreignKey: 'dietId',  
         otherKey: 'recipeId'
       })
     }

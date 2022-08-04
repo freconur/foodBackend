@@ -21,10 +21,13 @@ function setupModels(sequelize) {
 
   //aquie hacemos las asociaciones
   Customer.associate(sequelize.models);
-  User.associate(sequelize.models)
-  Category.associate(sequelize.models)
-  Product.associate(sequelize.models)
-  Orders.associate(sequelize.models)
+  User.associate(sequelize.models);
+  Category.associate(sequelize.models);
+  Product.associate(sequelize.models);
+  Orders.associate(sequelize.models);
+  Diet.associate(sequelize.models)
+
+  
 }
 
 module.exports = setupModels;

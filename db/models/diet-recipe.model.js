@@ -3,7 +3,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { RECIPE_TABLE } = require('./recipe.model')
 const { DIET_TABLE } = require('./diet.model')
 
-const DIET_RECIPE_TABLE = 'recipe';
+const DIET_RECIPE_TABLE = 'diets_recipes';
 const DietRecipeSchema = {
   id: {
     type: DataTypes.UUID,
