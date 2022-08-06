@@ -6,7 +6,8 @@ const validatorHandler = require('../middlewares/validator.handler');
 const {
   getDietSchema,
   createDietSchema,
-  updateDietSchema
+  updateDietSchema,
+  addItemSchema
 } = require('../schemas/diet.schema');
 
 router.get('/', async (req, res) => {
@@ -33,6 +34,15 @@ router.post(
     async (req, res) => {
       const body = req.body;
       const newRecipe = await service.create(body);
+      res.status(201).json(newRecipe);
+    }
+  );
+  router.post(
+    '/add-item',
+    validatorHandler(addItemSchema, 'body'),
+    async (req, res) => {
+      const body = req.body;
+      const newRecipe = await service.addItem(body);
       res.status(201).json(newRecipe);
     }
   );

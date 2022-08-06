@@ -14,6 +14,12 @@ const DietSchema = {
     // autoIncrement: true,
     primaryKey: true,
   },
+  // id: {
+  //     allowNull: false,
+  //     autoIncrement: true,
+  //     primaryKey: true,
+  //     type: DataTypes.INTEGER
+  //   },
   name: {
     allowNull: false,
     type: DataTypes.STRING,
@@ -27,7 +33,14 @@ const DietSchema = {
 };
 
 class Diet extends Model {
-    static associate(){}
+    static associate(models){
+      this.belongsToMany(models.Recipe, {
+        as: 'recipes',
+        through: models.DietsRecipes,
+        foreignKey: 'dietId',
+        otherKey: 'recipeId'
+      })
+    }
     static config(sequelize){
         return {
             sequelize,

@@ -17,6 +17,7 @@ const updateRecipeSchema = Joi.object({
   title,
   description,
   stepToStep,
+  healthScore
 });
 
 const getRecipeSchema = Joi.object({

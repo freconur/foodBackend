@@ -20,6 +20,12 @@ const RecipeSchema = {
     // autoIncrement: true,
     primaryKey: true,
   },
+  // id: {
+  //     allowNull: false,
+  //     autoIncrement: true,
+  //     primaryKey: true,
+  //     type: DataTypes.INTEGER
+  //   },
   title: {
     allowNull: false,
     type: DataTypes.STRING,
